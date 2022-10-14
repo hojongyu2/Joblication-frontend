@@ -8,7 +8,7 @@ function UserContextProvider(props) {
   const [user, SetUser] = useState(userInitialState);
   const signIn = (userData) => SetUser(userData);
   const signOut = () => SetUser(userInitialState);
-
+  // console.log(user);
   return (
     <userContext.Provider value={{ user, signIn, signOut }}>
       {children}
