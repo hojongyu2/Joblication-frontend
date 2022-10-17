@@ -7,8 +7,6 @@ import { useNavigate } from "react-router-dom";
 import Layout from "../layout/Layout";
 import { userContext } from "../../context/UserContext";
 import Axios from "../../utilities/Axios";
-import GetIp from "../../utilities/GetIp";
-import SearchJobs from "../../utilities/SearchJobs";
 
 function Login() {
   const { signIn } = useContext(userContext);
@@ -33,8 +31,6 @@ function Login() {
     const fetchedUser = response.data.user;
     signIn(fetchedUser);
     navigate("/main");
-    // once user verified. then go to main page
-    // console.log(await GetIp())
   };
 
   return (
