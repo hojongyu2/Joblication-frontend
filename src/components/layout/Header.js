@@ -7,10 +7,11 @@ import Typography from "@mui/material/Typography";
 import InputBase from "@mui/material/InputBase";
 import SearchIcon from "@mui/icons-material/Search";
 import PlaceIcon from "@mui/icons-material/Place";
-import { Button } from "@mui/material";
+import { Button, Link } from "@mui/material";
 import { useContext } from "react";
 import { SearchContext } from "../../context/SearchContext";
 import Axios from "../../utilities/Axios";
+import DashBoardMenu from "../menu/DashBoardMenu";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -42,11 +43,11 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   "& .MuiInputBase-input": {
     padding: theme.spacing(1, 1, 1, 0),
     // vertical padding + font size from searchIcon
-    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
+    paddingLeft: `calc(7em + ${theme.spacing(6)})`,
     transition: theme.transitions.create("width"),
     width: "100%",
     [theme.breakpoints.up("sm")]: {
-      width: "20ch",
+      width: "25ch",
       "&:focus": {
         width: "20ch",
       },
@@ -56,7 +57,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 export default function Header() {
   const {
-    search, setSearch, pagenatedData, setPagenatedData,
+    search, setSearch, setPagenatedData,
   } = useContext(SearchContext);
 
   const onChangeJobTitle = (e) => {
@@ -82,14 +83,16 @@ export default function Header() {
       <AppBar position="static">
         <form onSubmit={onClickSearch}>
           <Toolbar>
-            <Typography
-              variant="h6"
-              noWrap
-              component="div"
-              sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}
-            >
-              Joblication
-            </Typography>
+            <Link href="/">
+              <Typography
+                variant="h6"
+                noWrap
+                component="div"
+                sx={{ flexGrow: 1, display: { xs: "none", sm: "block", color: "#fff" } }}
+              >
+                Joblication
+              </Typography>
+            </Link>
             <Search>
               <SearchIconWrapper>
                 <SearchIcon />
@@ -112,7 +115,8 @@ export default function Header() {
                 onChange={onChangeLocation}
               />
             </Search>
-            <Button type="submit" variant="contained" sx={{ margin: "10px", backgroundColor: "blue" }}>Search</Button>
+            <Button type="submit" variant="contained" sx={{ margin: "10px", color: "#fff" }}>Search</Button>
+            <DashBoardMenu></DashBoardMenu>
           </Toolbar>
         </form>
       </AppBar>

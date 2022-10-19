@@ -30,7 +30,7 @@ function Login() {
     const response = await Axios.post("/sign-in", { credentials: userLogin });
     const fetchedUser = response.data.user;
     signIn(fetchedUser);
-    navigate("/main");
+    navigate("/");
   };
 
   return (
