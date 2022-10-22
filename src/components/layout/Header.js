@@ -7,11 +7,12 @@ import Typography from "@mui/material/Typography";
 import InputBase from "@mui/material/InputBase";
 import SearchIcon from "@mui/icons-material/Search";
 import PlaceIcon from "@mui/icons-material/Place";
-import { Button, Link } from "@mui/material";
+import { Badge, Button, Link } from "@mui/material";
 import { useContext } from "react";
 import { SearchContext } from "../../context/SearchContext";
 import Axios from "../../utilities/Axios";
 import DashBoardMenu from "../menu/DashBoardMenu";
+import { MyCompanyListContext } from "../../context/MyCompanyListContext";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -43,7 +44,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   "& .MuiInputBase-input": {
     padding: theme.spacing(1, 1, 1, 0),
     // vertical padding + font size from searchIcon
-    paddingLeft: `calc(7em + ${theme.spacing(6)})`,
+    paddingLeft: `calc(5em + ${theme.spacing(4)})`,
     transition: theme.transitions.create("width"),
     width: "100%",
     [theme.breakpoints.up("sm")]: {
@@ -60,6 +61,9 @@ export default function Header() {
     search, setSearch, setPagenatedData,
   } = useContext(SearchContext);
 
+  // to have a badge count when company is added to my list
+  const { myCompanyList } = useContext(MyCompanyListContext);
+
   const onChangeJobTitle = (e) => {
     setSearch({
       ...search, jobTitle: e.target.value,
@@ -75,12 +79,17 @@ export default function Header() {
     const response = await Axios.post("/job-search", { jobTitle: search.jobTitle, location: search.location });
     const fetchedData = response.data;
     setPagenatedData(fetchedData);
-    // console.log(pagenatedData.searchResult.map((x) => x.map((y) => y.title)));
-    // console.log(pagenatedData.searchResult[0].map((x) => x.title));
   };
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static">
+      <AppBar
+        position="static"
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
         <form onSubmit={onClickSearch}>
           <Toolbar>
             <Link href="/">
@@ -102,6 +111,7 @@ export default function Header() {
                 inputProps={{ "aria-label": "search" }}
                 value={search.jobTitle}
                 onChange={onChangeJobTitle}
+                required
               />
             </Search>
             <Search>
@@ -113,10 +123,13 @@ export default function Header() {
                 inputProps={{ "aria-label": "search" }}
                 value={search.location}
                 onChange={onChangeLocation}
+                required
               />
             </Search>
             <Button type="submit" variant="contained" sx={{ margin: "10px", color: "#fff" }}>Search</Button>
-            <DashBoardMenu></DashBoardMenu>
+            <Badge badgeContent={myCompanyList.length} color="error">
+              <DashBoardMenu></DashBoardMenu>
+            </Badge>
           </Toolbar>
         </form>
       </AppBar>

@@ -8,7 +8,7 @@ import Layout from "../layout/Layout";
 import { userContext } from "../../context/UserContext";
 import Axios from "../../utilities/Axios";
 
-function Login() {
+function LoginPage() {
   const { signIn } = useContext(userContext);
   const [userLogin, setUserLogin] = useState({
     email: "",
@@ -71,4 +71,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default LoginPage;

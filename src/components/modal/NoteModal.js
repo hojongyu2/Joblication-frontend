@@ -1,12 +1,12 @@
 import * as React from "react";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import CommentIcon from "@mui/icons-material/Comment";
-import { IconButton, TextField } from "@mui/material";
+import { IconButton, TextField, Typography } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import { useContext } from "react";
+import DeleteIcon from "@mui/icons-material/Delete";
 import { MyCompanyListContext } from "../../context/MyCompanyListContext";
 import { NoteContext } from "../../context/NoteContext";
 import Axios from "../../utilities/Axios";
@@ -22,6 +22,7 @@ const style = {
   border: "2px solid #000",
   boxShadow: 24,
   p: 4,
+  overflow: "scroll",
 };
 
 export default function NoteModal() {
@@ -30,19 +31,21 @@ export default function NoteModal() {
   const handleClose = () => setOpen(false);
   const [noteInput, setNoteInput] = React.useState([]);
 
-  const { myNote, setMyNote } = useContext(NoteContext);
-  const { myCompanyList } = useContext(MyCompanyListContext);
+  const { myNote, setMyNote, setIsMyNoteDataLoading } = useContext(NoteContext);
+  const { companyId } = useContext(MyCompanyListContext);
 
   const onChangeInput = (e) => {
     setNoteInput(e.target.value);
   };
- 
-  const onClickIkon = async () => {
+
+  const onClickIAddNote = async () => {
+    setIsMyNoteDataLoading(true);
     const response = await Axios.post("/save-note", {
       note: noteInput,
-      savedCompanyId: myCompanyList.savedCompanyId,
+      savedCompanyId: companyId,
     });
-    console.log(response);
+    setMyNote(response.data);
+    setIsMyNoteDataLoading(false);
   };
 
   return (
@@ -61,8 +64,38 @@ export default function NoteModal() {
           <Box display="flex">
             <TextField onChange={onChangeInput} label="Your Note here" variant="standard" fullWidth />
             <IconButton>
-              <AddIcon fontSize="large" color="primary" onClick={onClickIkon}></AddIcon>
+              <AddIcon fontSize="large" color="primary" onClick={onClickIAddNote}></AddIcon>
             </IconButton>
+          </Box>
+          <Box>
+            {myNote.map((x, index) => (
+              <Box
+                key={index}
+                sx={{
+                  padding: "10px",
+                  margin: "10px 1px 1px 1px",
+                  borderRadius: "10px",
+                  backgroundColor: "#eeeeee",
+                  display: "flex",
+                  flexDirection: "row",
+                  justifyContent: "space-between",
+                }}
+              >
+                <Typography key={index} variant="body2" color="#616161">{x.note}</Typography>
+                <IconButton onClick={async () => {
+                  // when note is deleted, update myNote state variable to be most recent;
+                  setIsMyNoteDataLoading(true);
+                  await Axios.post("/delete-note", {
+                    savedCompanyId: companyId,
+                    note: x.note,
+                  });
+                  setIsMyNoteDataLoading(false);
+                }}
+                >
+                  <DeleteIcon></DeleteIcon>
+                </IconButton>
+              </Box>
+            ))}
           </Box>
         </Box>
       </Modal>

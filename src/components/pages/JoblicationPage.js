@@ -1,13 +1,21 @@
 import {
   Box, Card, Container, Typography,
 } from "@mui/material";
-// import JobDescriptionCard from "../card/JobDescriptionCard";
+import { useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import Layout from "../layout/Layout";
 import SavedJobCard from "../card/SavedJobCard";
+import { SearchContext } from "../../context/SearchContext";
 
 function JoblicationPage() {
+  const { pagenatedData } = useContext(SearchContext);
+  const navigate = useNavigate();
   return (
     <Layout>
+      {pagenatedData && (
+        navigate("/")
+        // go to main page if search funcionality has been actvated
+      )}
       <Container sx={{ display: "flex", flexDirection: "column" }}>
         <Box sx={{
           display: "flex", flexDirection: "row", justifyContent: "space-around", marginLeft: "180px",
@@ -26,9 +34,7 @@ function JoblicationPage() {
             minWidth: "275px", height: "100vh", backgroundColor: "#eeeeee", overflow: "scroll", margin: "5px",
           }}
           >
-
             <SavedJobCard></SavedJobCard>
-
           </Card>
           <Card sx={{
             minWidth: "275px", height: "100vh", backgroundColor: "#eeeeee", overflow: "scroll", margin: "5px",

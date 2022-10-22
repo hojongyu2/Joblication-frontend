@@ -2,14 +2,12 @@ import {
   Box, Button, Container, Stack, TextField,
 } from "@mui/material";
 import Link from "@mui/material/Link";
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Layout from "../layout/Layout";
-import { userContext } from "../../context/UserContext";
 import Axios from "../../utilities/Axios";
 
-function Signup() {
-  const { signIn } = useContext(userContext);
+function SignupPage() {
   const [userRegistration, setUserRegistration] = useState({
     firstName: "",
     lastName: "",
@@ -48,14 +46,10 @@ function Signup() {
   const onClickRegister = async (e) => {
     e.preventDefault();
 
-    const response = await Axios.post("/register-user", {
+    await Axios.post("/register-user", {
       ...userRegistration,
     });
-    // console.log(response)
-    const { user } = response.data;
-    // receive user information from server and put it in the state.
-    signIn(user);
-    navigate("/");
+    navigate("/login");
   };
 
   return (
@@ -99,4 +93,4 @@ function Signup() {
   );
 }
 
-export default Signup;
+export default SignupPage;

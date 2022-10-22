@@ -4,13 +4,17 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import Fade from "@mui/material/Fade";
 import { useNavigate } from "react-router-dom";
+import { Link } from "@mui/material";
 import Axios from "../../utilities/Axios";
 import { userContext } from "../../context/UserContext";
+import { MyCompanyListContext } from "../../context/MyCompanyListContext";
 
 export default function DashBoardMenu() {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const { signOut, user } = React.useContext(userContext);
+  const { setIsMyCompanyDataLoading } = React.useContext(MyCompanyListContext);
+
   const navigate = useNavigate();
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -19,11 +23,12 @@ export default function DashBoardMenu() {
     setAnchorEl(null);
   };
   const onClickMyApp = () => {
+    setIsMyCompanyDataLoading(true);
     setAnchorEl(null);
-    navigate("/job-application");
+    setIsMyCompanyDataLoading(false);
   };
-  const onClickSignOut = () => {
-    Axios.get("/sign-out");
+  const onClickSignOut = async () => {
+    await Axios.get("/sign-out");
     signOut();
     setAnchorEl(null);
     navigate("/");
@@ -31,6 +36,10 @@ export default function DashBoardMenu() {
   const onClickSignIn = () => {
     setAnchorEl(null);
     navigate("/login");
+  };
+  const onClickProfile = () => {
+    setAnchorEl(null);
+    navigate("/profile");
   };
   return (
     <div>
@@ -55,15 +64,21 @@ export default function DashBoardMenu() {
         onClose={handleClose}
         TransitionComponent={Fade}
       >
-        <MenuItem onClick={handleClose}>Profile</MenuItem>
         {!user && (
           <MenuItem onClick={onClickSignIn}>Sign-in</MenuItem>
         )}
-        {user && (
-        <MenuItem onClick={onClickMyApp}>My application</MenuItem>
+        {(user) && (
+          // navigate doesn't work. It does not show the most updated version of state
+          // If I use navigate
+          <Link href="/job-application" sx={{ textDecorationLine: "none" }}>
+            <MenuItem onClick={onClickMyApp} style={{ color: "black" }}>My application</MenuItem>
+          </Link>
         )}
         {user && (
-        <MenuItem onClick={onClickSignOut}>Logout</MenuItem>
+          <MenuItem onClick={onClickProfile}>Profile</MenuItem>
+        )}
+        {user && (
+          <MenuItem onClick={onClickSignOut}>Sign out</MenuItem>
         )}
       </Menu>
     </div>

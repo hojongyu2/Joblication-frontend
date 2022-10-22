@@ -15,18 +15,19 @@ import { MyCompanyListContext } from "../../context/MyCompanyListContext";
 export default function JobDescriptionCard() {
   const { pagenatedData } = useContext(SearchContext);
   const { user } = useContext(userContext);
-  const { setMyCompanyList, myCompanyList } = useContext(MyCompanyListContext);
-  // console.log(myCompanyList)
+  const { setMyCompanyList, myCompanyList } = useContext(
+    MyCompanyListContext,
+  );
   return (
     <Card sx={{
-      minWidth: "100%", height: "100vh", backgroundColor: "#eeeeee", overflow: "scroll",
+      height: "100vh", backgroundColor: "#eeeeee", overflow: "scroll", maxWidth: "800px",
     }}
     >
       {pagenatedData.searchResult.map((x) => x.map((y, index) => (
         <Box
-          sx={{ padding: "30px" }}
+          sx={{ padding: "10px" }}
+          key={index}
         >
-          {index + 1}
           <Box display="flex" flexDirection="row" justifyContent="space-between" backgroundColor="white" sx={{ padding: "5px", borderRadius: "10px 10px 0px 0px" }}>
             <Work></Work>
             <Typography sx={{ mb: 1.5 }} color="text.secondary">
@@ -54,24 +55,27 @@ export default function JobDescriptionCard() {
                     company: y.company,
                     location: y.location,
                     url: y.url,
-                    savedCompanyId: response.data.savedCompanyId,
+                    saved: response.data.saved,
                   }]);
                 }}
               >
                 Add
-
               </Button>
             </CardActions>
             )}
             {!user && (
               <Link href="/login">
-                <Button>Login</Button>
+                <Button>
+                  Login
+                </Button>
               </Link>
             )}
           </Box>
-          <Box display="flex" flexDirection="column" justifyContent="center" backgroundColor="white" sx={{ padding: "5px", borderRadius: "0px 0px 10px 10px" }}>
-            <Link href={y.url} target="_blank" variant="h6">
-              {`${y.snippet.replace(/(\r\n|\n|\r)/gm, "").split(" ").slice(0, 15).join(" ")}....`}
+          <Box backgroundColor="white" display="flex" flexDirection="row" justifyContent="center" sx={{ padding: "5px", borderRadius: "0px 0px 10px 10px" }}>
+            <Link href={y.url} target="_blank">
+              <Typography variant="h6">
+                Read more and Apply now
+              </Typography>
             </Link>
           </Box>
         </Box>

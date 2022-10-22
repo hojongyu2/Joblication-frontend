@@ -13,7 +13,7 @@ function MainPage() {
     <Layout>
       {pagenatedData
       && (
-      <Box>
+      <Box display="flex" flexDirection="column" alignItems="center" justifyContent="center">
         <Typography fontWeight="bold" fontSize={40}>
           {pagenatedData.total}
           {" "}
