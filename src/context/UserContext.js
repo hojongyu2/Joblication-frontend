@@ -9,7 +9,7 @@ function UserContextProvider(props) {
   const userInitialState = localStorage.getItem("userState") ? JSON.parse(localStorage.getItem("userState")) : undefined;
 
   const [user, SetUser] = useState(userInitialState);
-  console.log(user);
+  // console.log(user)
   // useEffect to track user state;
   useEffect(() => {
     if (user) {
@@ -21,10 +21,17 @@ function UserContextProvider(props) {
 
   const signIn = (userData) => SetUser(userData);
   const signOut = () => SetUser(undefined);
-  // console.log("user: ", user);
+
+  // for admin
+  const [allUsers, setAllUsers] = useState([]);
+
+  const [editUser, setEditUser] = useState({});
 
   return (
-    <userContext.Provider value={{ user, signIn, signOut }}>
+    <userContext.Provider value={{
+      user, signIn, signOut, allUsers, setAllUsers, editUser, setEditUser
+    }}
+    >
       {children}
     </userContext.Provider>
   );

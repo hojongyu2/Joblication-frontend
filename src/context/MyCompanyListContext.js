@@ -31,7 +31,11 @@ function MyCompanyListProvider(props) {
 
   return (
     <MyCompanyListContext.Provider value={{
-      myCompanyList, setMyCompanyList, companyId, setCompanyId, setIsMyCompanyDataLoading,
+      myCompanyList,
+      setMyCompanyList,
+      companyId,
+      setCompanyId,
+      setIsMyCompanyDataLoading,
     }}
     >
       {children}

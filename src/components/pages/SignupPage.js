@@ -76,7 +76,7 @@ function SignupPage() {
               <TextField label="Last Name" variant="outlined" sx={{ padding: "10px" }} value={userRegistration.lastName} onChange={onChangeLastName} required></TextField>
             </Stack>
             <Stack direction="column" textAlign="center" justifyContent="center">
-              <TextField label="Email Address" variant="outlined" sx={{ padding: "10px" }} value={userRegistration.email} onChange={onChangeEmail} required></TextField>
+              <TextField label="Email Address" variant="outlined" sx={{ padding: "10px" }} value={userRegistration.email} onChange={onChangeEmail} type="email" required></TextField>
               <TextField label="Password" variant="outlined" sx={{ padding: "10px" }} value={userRegistration.password} type="password" onChange={onChangePassword} required></TextField>
               <TextField label="Job Title" variant="outlined" sx={{ padding: "10px" }} value={userRegistration.jobTitle} onChange={onChangeJobTitle} required></TextField>
               <Box>

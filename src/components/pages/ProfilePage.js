@@ -1,11 +1,12 @@
 import {
-  Box, Button, Container, Link, Stack, TextField, Typography,
+  Box, Button, Container, Stack, TextField, Typography,
 } from "@mui/material";
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { SearchContext } from "../../context/SearchContext";
 import { userContext } from "../../context/UserContext";
 import Axios from "../../utilities/Axios";
+import EditProfileCard from "../card/EditProfileCard";
 import Layout from "../layout/Layout";
 
 function ProfilePage() {
@@ -19,9 +20,7 @@ function ProfilePage() {
   const onClickEdit = () => {
     setIsButtonClicked(true);
   };
-  const onSubmitEdit = () => {
 
-  };
   const checkIsAdmin = async () => {
     const response = await Axios.get("/check-admin");
     const fetchedData = response.data.toString();
@@ -78,26 +77,7 @@ function ProfilePage() {
         )}
         {isButtonClicked
           && (
-          <form onSubmit={onSubmitEdit}>
-            <Box sx={{
-              backgroundColor: "white", borderRadius: "10px",
-            }}
-            >
-              <Stack direction="row" justifyContent="center">
-                <TextField label="First Name" variant="outlined" sx={{ padding: "10px" }} required></TextField>
-                <TextField label="Last Name" variant="outlined" sx={{ padding: "10px" }} required></TextField>
-              </Stack>
-              <Stack direction="column" textAlign="center" justifyContent="center">
-                <TextField label="Email Address" variant="outlined" sx={{ padding: "10px" }} required></TextField>
-                <TextField label="Password" variant="outlined" sx={{ padding: "10px" }} type="password" required></TextField>
-                <TextField label="Job Title" variant="outlined" sx={{ padding: "10px" }} required></TextField>
-                <Box>
-                  <Button type="submit" variant="contained" sx={{ marginBottom: "10px" }}>submit</Button>
-                </Box>
-              </Stack>
-            </Box>
-
-          </form>
+          <EditProfileCard></EditProfileCard>
           )}
       </Container>
     </Layout>

@@ -14,6 +14,7 @@ function LoginPage() {
     email: "",
     password: "",
   });
+  const [isUserErrorMessage, setIsUserErrorMessage] = useState("")
   const navigate = useNavigate();
   const onChangeEmail = (e) => {
     setUserLogin({
@@ -28,9 +29,13 @@ function LoginPage() {
   const controlSubmitForm = async (e) => {
     e.preventDefault();
     const response = await Axios.post("/sign-in", { credentials: userLogin });
-    const fetchedUser = response.data.user;
-    signIn(fetchedUser);
-    navigate("/");
+    if (response.data.success === false) {
+      setIsUserErrorMessage(response.data.message)
+    } else {
+      const fetchedUser = response.data.user;
+      signIn(fetchedUser);
+      navigate("/");
+    }
   };
 
   return (
@@ -48,13 +53,14 @@ function LoginPage() {
           borderRadius: "10px",
         }}
         >
+          {isUserErrorMessage}
           <Box sx={{
             backgroundColor: "white", borderRadius: "10px",
           }}
           >
             <Stack spacing={2} justifyContent="center">
-              <TextField label="Email Address" variant="outlined" sx={{ padding: "10px" }} value={userLogin.email} onChange={onChangeEmail}></TextField>
-              <TextField label="Password" variant="outlined" sx={{ padding: "10px" }} value={userLogin.password} onChange={onChangePassword}></TextField>
+              <TextField label="Email Address" variant="outlined" sx={{ padding: "10px" }} value={userLogin.email} onChange={onChangeEmail} required></TextField>
+              <TextField label="Password" variant="outlined" sx={{ padding: "10px" }} value={userLogin.password} onChange={onChangePassword} required></TextField>
             </Stack>
             <Stack direction="row" textAlign="center" justifyContent="center" p={4} spacing={2}>
               <Button type="submit" variant="contained">Log In</Button>

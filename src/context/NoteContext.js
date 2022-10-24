@@ -11,7 +11,7 @@ function NoteContextProvider(props) {
   const [myNote, setMyNote] = useState([]);
   const [isMyNoteDataLoading, setIsMyNoteDataLoading] = useState(false);
   const { companyId } = useContext(MyCompanyListContext);
-
+  // console.log(companyId)
   // useEffect is watching isMyNoteDataLoading state variable and whenever there is a change;
   // useEffect will fetch the data from the backend and update it;
   useEffect(() => {
@@ -22,7 +22,7 @@ function NoteContextProvider(props) {
       };
       getMyNotes();
     }
-  }, [isMyNoteDataLoading]);
+  }, [isMyNoteDataLoading], [companyId]);
 
   return (
     <NoteContext.Provider value={{ myNote, setMyNote, setIsMyNoteDataLoading }}>

@@ -25,6 +25,7 @@ module.exports = {
     "react/prop-types": "off",
     "react/self-closing-comp": "off",
     "react/jsx-no-constructed-context-values": "off",
-    "react/no-array-index-key": "off"
+    "react/no-array-index-key": "off",
+    "react/jsx-props-no-spreading": "off",
   },
 };

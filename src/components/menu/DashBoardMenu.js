@@ -1,19 +1,19 @@
-import * as React from "react";
 import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import Fade from "@mui/material/Fade";
 import { useNavigate } from "react-router-dom";
 import { Link } from "@mui/material";
+import { useContext, useState } from "react";
 import Axios from "../../utilities/Axios";
 import { userContext } from "../../context/UserContext";
 import { MyCompanyListContext } from "../../context/MyCompanyListContext";
 
 export default function DashBoardMenu() {
-  const [anchorEl, setAnchorEl] = React.useState(null);
+  const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
-  const { signOut, user } = React.useContext(userContext);
-  const { setIsMyCompanyDataLoading } = React.useContext(MyCompanyListContext);
+  const { signOut, user } = useContext(userContext);
+  const { setMyCompanyList, setIsMyCompanyDataLoading } = useContext(MyCompanyListContext);
 
   const navigate = useNavigate();
   const handleClick = (event) => {
@@ -30,6 +30,7 @@ export default function DashBoardMenu() {
   const onClickSignOut = async () => {
     await Axios.get("/sign-out");
     signOut();
+    setMyCompanyList([]);
     setAnchorEl(null);
     navigate("/");
   };
