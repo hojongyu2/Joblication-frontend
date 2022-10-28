@@ -1,5 +1,6 @@
 import {
-  Box, Button, Container, Stack, TextField,
+  AlertTitle,
+  Box, Button, Container, Stack, TextField, Alert, Typography,
 } from "@mui/material";
 import Link from "@mui/material/Link";
 import { useState } from "react";
@@ -15,6 +16,7 @@ function SignupPage() {
     password: "",
     jobTitle: "",
   });
+  const [signupError, setSignupError] = useState("");
 
   const navigate = useNavigate();
 
@@ -45,11 +47,16 @@ function SignupPage() {
   };
   const onClickRegister = async (e) => {
     e.preventDefault();
-
-    await Axios.post("/register-user", {
+    const response = await Axios.post("/register-user", {
       ...userRegistration,
     });
-    navigate("/login");
+    console.log(response.data.result);
+    if (response.data.result === false) {
+      setSignupError("User Already Exist");
+    } else {
+      setSignupError("");
+      navigate("/login");
+    }
   };
 
   return (
@@ -84,6 +91,7 @@ function SignupPage() {
               </Box>
             </Stack>
           </Box>
+          <Typography variant="subtitle2">{signupError}</Typography>
           <Link href="/">
             <Button sx={{ paddingTop: "50px" }}>ALREADY HAVE AN ACCOUNT?</Button>
           </Link>

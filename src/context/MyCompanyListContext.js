@@ -11,7 +11,6 @@ function MyCompanyListProvider(props) {
   const [myCompanyList, setMyCompanyList] = useState([]);
   const [companyId, setCompanyId] = useState("");
   const [isMyCompanyDataLoading, setIsMyCompanyDataLoading] = useState(false);
-
   const { user } = useContext(userContext);
 
   // useEffect is watching isMyCompanyDataLoading state variable and whenever there is a change;

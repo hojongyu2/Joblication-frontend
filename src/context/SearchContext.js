@@ -9,7 +9,6 @@ function SearchContextProvider(props) {
     location: "",
   });
   const [pagenatedData, setPagenatedData] = useState(undefined);
-
   return (
     <SearchContext.Provider value={{
       search, setSearch, pagenatedData, setPagenatedData,

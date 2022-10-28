@@ -1,7 +1,6 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
 import AdminPage from "./components/pages/AdminPage";
-import SavedJobPage from "./components/pages/SavedJobPage";
 import LoginPage from "./components/pages/LoginPage";
 import MainPage from "./components/pages/MainPage";
 import ProfilePage from "./components/pages/ProfilePage";
@@ -11,6 +10,7 @@ import NoteContextProvider from "./context/NoteContext";
 import SearchContextProvider from "./context/SearchContext";
 import UserContextProvider from "./context/UserContext";
 import CustomThemeProvider from "./CustomThemeProvider";
+import JoblicationPage from "./components/pages/JoblicationPage";
 
 
 function App() {
@@ -25,7 +25,7 @@ function App() {
                   <Route path="/" element={<MainPage />} />
                   <Route path="/signup" element={<SignupPage />} />
                   <Route path="/login" element={<LoginPage />} />
-                  <Route path="/job-application" element={<SavedJobPage />} />
+                  <Route path="/job-application" element={<JoblicationPage />} />
                   <Route path="/profile" element={<ProfilePage />} />
                   <Route path="/admin" element={<AdminPage />} />
                 </Routes>

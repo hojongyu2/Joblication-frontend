@@ -1,5 +1,5 @@
 import {
-  Box, Button, Container, Stack, TextField,
+  Box, Button, Container, Stack, TextField, Typography,
 } from "@mui/material";
 import Link from "@mui/material/Link";
 import { useContext, useState } from "react";
@@ -14,7 +14,7 @@ function LoginPage() {
     email: "",
     password: "",
   });
-  const [isUserErrorMessage, setIsUserErrorMessage] = useState("")
+  const [isUserErrorMessage, setIsUserErrorMessage] = useState("");
   const navigate = useNavigate();
   const onChangeEmail = (e) => {
     setUserLogin({
@@ -30,7 +30,7 @@ function LoginPage() {
     e.preventDefault();
     const response = await Axios.post("/sign-in", { credentials: userLogin });
     if (response.data.success === false) {
-      setIsUserErrorMessage(response.data.message)
+      setIsUserErrorMessage(response.data.message);
     } else {
       const fetchedUser = response.data.user;
       signIn(fetchedUser);
@@ -53,7 +53,6 @@ function LoginPage() {
           borderRadius: "10px",
         }}
         >
-          {isUserErrorMessage}
           <Box sx={{
             backgroundColor: "white", borderRadius: "10px",
           }}
@@ -70,6 +69,7 @@ function LoginPage() {
               </Link>
             </Stack>
           </Box>
+          <Typography variant="subtitle2">{isUserErrorMessage}</Typography>
           <Button sx={{ paddingTop: "50px" }}>forgot password?</Button>
         </Container>
       </form>

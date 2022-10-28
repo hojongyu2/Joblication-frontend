@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
 import { DragDropContext, Draggable, Droppable } from "@hello-pangea/dnd";
-import { v4 as uuidv4 } from "uuid";
 import LaunchIcon from "@mui/icons-material/Launch";
 import CircleIcon from "@mui/icons-material/Circle";
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -31,25 +30,26 @@ function Test() {
   const myCompanyListClone = cloneDeep(myCompanyList);
 
   const columnsFromBackend = {
-    [uuidv4()]: {
+    column1: {
       name: "Watch list",
       items: myCompanyListClone,
     },
-    [uuidv4()]: {
+    column2: {
       name: "Applied",
       items: [],
     },
-    [uuidv4()]: {
+    column3: {
       name: "Interview",
       items: [],
     },
-    [uuidv4()]: {
+    column4: {
       name: "Accepted",
       items: [],
     },
   };
 
   const columnClone = cloneDeep(columnsFromBackend);
+  console.log(columnClone);
 
   const onDragEnd = (result, columns, setColumns) => {
     if (!result.destination) return;
@@ -206,7 +206,7 @@ function Test() {
                                   <NoteModal></NoteModal>
                                 </Button>
                                 <IconButton>
-                                  <DeleteIcon onClick={() => deleteCompany(item._id)}></DeleteIcon>
+                                  <DeleteIcon color="primary" onClick={() => deleteCompany(item._id)}></DeleteIcon>
                                 </IconButton>
                               </Box>
                             </Card>
