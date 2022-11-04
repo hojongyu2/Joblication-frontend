@@ -65,8 +65,8 @@ function SignupPage() {
         <Container sx={{
           width: "100%",
           height: "100%",
-          padding: "100px",
-          backgroundColor: "lightgray",
+          padding: "10px",
+          backgroundColor: "#e0e0e0",
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
@@ -75,7 +75,7 @@ function SignupPage() {
         }}
         >
           <Box sx={{
-            backgroundColor: "white", borderRadius: "10px",
+            backgroundColor: "#fafafa", borderRadius: "10px",
           }}
           >
             <Stack direction="row" justifyContent="center">

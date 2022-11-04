@@ -6,7 +6,7 @@ import { userContext } from "../../context/UserContext";
 import Axios from "../../utilities/Axios";
 
 function EditProfileCard() {
-  const { user } = useContext(userContext);
+  const { user, signIn, setUser } = useContext(userContext);
 
   const [editUser, setEditUser] = useState({
     firstName: user.firstName,
@@ -65,20 +65,15 @@ function EditProfileCard() {
       ...editUser,
     });
     if (response.data.success === true) {
-      setEditUser({
-        firstName: response.data.message.firstName,
-        lastName: response.data.message.lastName,
-        email: response.data.message.email,
-        jobTitle: response.data.message.jobTitle,
-      });
-      // need to fix this
+      alert("Your profile has been edited");
       window.location.reload();
+    } else {
+      setError("Your old password do not match");
     }
   };
 
   return (
     <form onSubmit={onSubmitEdit}>
-      {error}
       <Box sx={{
         backgroundColor: "white", borderRadius: "10px",
       }}
@@ -98,6 +93,7 @@ function EditProfileCard() {
           </Box>
         </Stack>
       </Box>
+      {error}
     </form>
   );
 }

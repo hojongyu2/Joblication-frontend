@@ -45,7 +45,7 @@ function LoginPage() {
           width: "100%",
           height: "100%",
           padding: "100px",
-          backgroundColor: "lightgray",
+          backgroundColor: "#e0e0e0",
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
@@ -54,14 +54,14 @@ function LoginPage() {
         }}
         >
           <Box sx={{
-            backgroundColor: "white", borderRadius: "10px",
+            backgroundColor: "#fafafa", borderRadius: "10px",
           }}
           >
             <Stack spacing={2} justifyContent="center">
               <TextField label="Email Address" variant="outlined" sx={{ padding: "10px" }} value={userLogin.email} onChange={onChangeEmail} required></TextField>
               <TextField label="Password" variant="outlined" sx={{ padding: "10px" }} value={userLogin.password} onChange={onChangePassword} required></TextField>
             </Stack>
-            <Stack direction="row" textAlign="center" justifyContent="center" p={4} spacing={2}>
+            <Stack direction="row" textAlign="center" justifyContent="center" p={4} spacing={0}>
               <Button type="submit" variant="contained">Log In</Button>
               <Button disabled>Or</Button>
               <Link href="/signup">
@@ -69,7 +69,9 @@ function LoginPage() {
               </Link>
             </Stack>
           </Box>
-          <Typography variant="subtitle2">{isUserErrorMessage}</Typography>
+          <Box width="240px">
+            <Typography variant="subtitle2" width="100%">{isUserErrorMessage}</Typography>
+          </Box>
           <Button sx={{ paddingTop: "50px" }}>forgot password?</Button>
         </Container>
       </form>

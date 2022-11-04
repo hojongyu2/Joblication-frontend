@@ -41,7 +41,7 @@ function ProfilePage() {
       <Container sx={{
         width: "100%",
         height: "100%",
-        padding: "100px",
+        padding: "10px",
         backgroundColor: "lightgray",
         display: "flex",
         flexDirection: "column",

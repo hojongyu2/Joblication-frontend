@@ -35,7 +35,7 @@ function JoblicationPage() {
               setValue(index);
             }}
           >
-            <BottomNavigationAction label="Watch-List" />
+            <BottomNavigationAction label="Watch-list" />
             <BottomNavigationAction label="Applied" />
             <BottomNavigationAction label="Interview" />
             <BottomNavigationAction label="Accepted" />
@@ -46,7 +46,7 @@ function JoblicationPage() {
         }}
         >
           <Card sx={{
-            minWidth: "100%", height: "100vh", backgroundColor: "#eeeeee", overflow: "scroll", margin: "5px",
+            minWidth: "100%", height: "100vh", backgroundColor: "#e0f2f1", overflow: "scroll", margin: "5px",
           }}
           >
             {value === 0 && (

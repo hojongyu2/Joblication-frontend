@@ -12,7 +12,6 @@ import UserContextProvider from "./context/UserContext";
 import CustomThemeProvider from "./CustomThemeProvider";
 import JoblicationPage from "./components/pages/JoblicationPage";
 
-
 function App() {
   return (
     <CustomThemeProvider>

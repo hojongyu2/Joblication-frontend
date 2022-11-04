@@ -6,7 +6,8 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { useContext } from "react";
 import Link from "@mui/material/Link";
-import Work from "@mui/icons-material/Work";
+import { Avatar, CardMedia } from "@mui/material";
+import CircleIcon from "@mui/icons-material/Circle";
 import { SearchContext } from "../../context/SearchContext";
 import Axios from "../../utilities/Axios";
 import { userContext } from "../../context/UserContext";
@@ -20,7 +21,7 @@ export default function JobDescriptionCard() {
   );
   return (
     <Card sx={{
-      height: "100vh", backgroundColor: "#eeeeee", overflow: "scroll", maxWidth: "800px",
+      height: "100vh", backgroundColor: "#e0f2f1", overflow: "scroll", maxWidth: "800px",
     }}
     >
       {pagenatedData.searchResult.map((x) => x.map((y, index) => (
@@ -29,20 +30,25 @@ export default function JobDescriptionCard() {
           key={index}
         >
           <Box display="flex" flexDirection="row" justifyContent="space-between" backgroundColor="white" sx={{ padding: "5px", borderRadius: "10px 10px 0px 0px" }}>
-            <Work></Work>
-            <Typography sx={{ mb: 1.5 }} color="text.secondary">
-              {y.title}
-            </Typography>
-            <Typography sx={{ mb: 1.5 }} color="text.secondary">
-              {y.company}
-            </Typography>
-            <Typography sx={{ mb: 1.5 }} color="text.secondary">
-              {y.location}
-            </Typography>
+            <Box display="flex" flexDirection="column">
+              <Typography sx={{ mb: 1.5, display: "inline-flex" }} color="text.secondary">
+                <CircleIcon sx={{ width: "8px", marginRight: "5px" }} />
+                {y.title}
+              </Typography>
+              <Typography sx={{ mb: 1.5, display: "inline-flex" }} color="text.secondary">
+                <CircleIcon sx={{ width: "8px", marginRight: "5px" }} />
+                {y.company}
+              </Typography>
+              <Typography sx={{ mb: 1.5, display: "inline-flex" }} color="text.secondary">
+                <CircleIcon sx={{ width: "8px", marginRight: "5px" }} />
+                {y.location}
+              </Typography>
+            </Box>
             {user && (
             <CardActions>
               <Button
                 variant="contained"
+                color="error"
                 onClick={async () => {
                   const response = await Axios.post("/joblication", {
                     jobTitle: y.title,

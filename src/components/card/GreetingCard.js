@@ -5,7 +5,7 @@ function GreetingCard() {
   return (
     <Container>
       <Box minWidth={100} textAlign="center">
-        <Typography variant="h3" sx={{ color: "#0075FF" }}><strong>Joblication</strong></Typography>
+        <Typography variant="h3" sx={{ color: "#d84315" }}><strong>Joblication</strong></Typography>
         <Typography variant="h4">Find your next job!</Typography>
       </Box>
     </Container>

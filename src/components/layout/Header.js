@@ -30,7 +30,7 @@ const Search = styled("div")(({ theme }) => ({
 }));
 
 const SearchIconWrapper = styled("div")(({ theme }) => ({
-  padding: theme.spacing(0, 2),
+  padding: theme.spacing(0, 1),
   height: "100%",
   position: "absolute",
   pointerEvents: "none",
@@ -42,13 +42,13 @@ const SearchIconWrapper = styled("div")(({ theme }) => ({
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
   color: "inherit",
   "& .MuiInputBase-input": {
-    padding: theme.spacing(1, 1, 1, 0),
+    padding: theme.spacing(1, 0, 0.5, 0),
     // vertical padding + font size from searchIcon
-    paddingLeft: `calc(5em + ${theme.spacing(4)})`,
+    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
     transition: theme.transitions.create("width"),
     width: "100%",
     [theme.breakpoints.up("sm")]: {
-      width: "25ch",
+      width: "15ch",
       "&:focus": {
         width: "20ch",
       },
@@ -88,15 +88,17 @@ export default function Header() {
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
+          minHeight: "100%",
         }}
       >
         <form onSubmit={onClickSearch}>
           <Toolbar>
             <Link href="/">
               <Typography
-                variant="h6"
+                variant="h5"
                 noWrap
                 component="div"
+                minWidth="100%"
                 sx={{ flexGrow: 1, display: { xs: "none", sm: "block", color: "#fff" } }}
               >
                 Joblication
@@ -107,7 +109,7 @@ export default function Header() {
                 <SearchIcon />
               </SearchIconWrapper>
               <StyledInputBase
-                placeholder="Job Title or keyword"
+                placeholder="Job title or keyword"
                 inputProps={{ "aria-label": "search" }}
                 value={search.jobTitle}
                 onChange={onChangeJobTitle}
@@ -126,7 +128,7 @@ export default function Header() {
                 required
               />
             </Search>
-            <Button type="submit" variant="contained" sx={{ margin: "10px", color: "#fff" }}>Search</Button>
+            <Button type="submit" variant="contained" size="small" sx={{ margin: "10px", color: "#fff" }}>Search</Button>
             <Badge badgeContent={myCompanyList.length} color="error">
               <DashBoardMenu></DashBoardMenu>
             </Badge>

@@ -5,6 +5,7 @@ import Fade from "@mui/material/Fade";
 import { useNavigate } from "react-router-dom";
 import { Link } from "@mui/material";
 import { useContext, useState } from "react";
+import MenuIcon from "@mui/icons-material/Menu";
 import Axios from "../../utilities/Axios";
 import { userContext } from "../../context/UserContext";
 import { MyCompanyListContext } from "../../context/MyCompanyListContext";
@@ -51,9 +52,10 @@ export default function DashBoardMenu() {
         aria-haspopup="true"
         aria-expanded={open ? "true" : undefined}
         onClick={handleClick}
+        size="small"
         sx={{ color: "#fff" }}
       >
-        Dashboard
+        <MenuIcon></MenuIcon>
       </Button>
       <Menu
         id="fade-menu"
