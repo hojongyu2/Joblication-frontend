@@ -1,6 +1,5 @@
 import { createTheme, ThemeProvider } from "@mui/material";
 
-// const TEAL_COLOR = "#2196f3";
 const TEAL_COLOR = "#00796b";
 
 const theme = createTheme({
